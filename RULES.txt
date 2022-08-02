@@ -33,7 +33,7 @@ _______.______..______.
 |      |       |      |
 _______|______.|______|
 
-On the second apparition, the position of the X is equal to the previous one ! It is therefore equal and in the game, you'd have to call it by pressing "a".
+On the second appearance, the position of the X is equal to the previous one ! It is therefore equal and in the game, you'd have to call it by pressing "a".
 On Single 2, this is the same process, but you would have to remember the first two apparitions, and recall them, etc, etc. 
 
 Here are the rules :
