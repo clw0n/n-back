@@ -1,5 +1,5 @@
 N-Back consists of a 3x3 grid in which, depending on the mode you are playing (single, dual, tri, quad or penta) you will have to call back the following parameters,
-n times the value of n backwards.
+n times the value backwards.
 
 Single : the position of the X
 Dual : the position of the X and the sound
