@@ -1,4 +1,4 @@
-#N-Back
+# N-Back
 N-Back is a cognitive enhancment game that was proven to increase your fluid intelligence. To install the game, simply clone the repository in the terminal
 with : git clone https://github.com/clw0n/n-back
 
