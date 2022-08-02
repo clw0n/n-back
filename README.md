@@ -1,5 +1,5 @@
 # N-Back
-N-Back is a cognitive enhancment game that was proven to increase your fluid intelligence, which is the 'intelligence' responsible from problem solving abilities, analogies, reasoning skills, which was previously thought to be fixed after a certain period.
+N-Back is a cognitive enhancment game that was proven to increase your fluid intelligence, which is the 'intelligence' responsible for problem solving skills, analogies, reasoning skills, which was previously thought to be fixed after a certain period.
 
 To install the game, simply clone the repository in the terminal
 with : __git clone https://github.com/clw0n/n-back__ and run __'python3 n-back.py'__
