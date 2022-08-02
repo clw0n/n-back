@@ -11,7 +11,7 @@ def select():
             5)Penta-N-Back\n""")
     game_mode = int(input("> "))
     if game_mode == 1:
-        start_single(z)
+        start_single()
     elif game_mode == 2:
         sys.exit("Game mode not available for now !")
     elif game_mode == 3:
