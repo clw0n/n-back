@@ -39,7 +39,7 @@ def start_single():
         rand_num = random.randint(0,2)
         rand_num2 = random.randint(0,2)
         grid[rand_num][rand_num2] = "X"
-        compare.list_append(rand_num, rand_num2)
+        compare_list.append(rand_num, rand_num2)
         print_grid()
         answer = raw_input("> ")
         if answer == "A" or "a":
