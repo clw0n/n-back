@@ -1,0 +1,50 @@
+N-Back consists of a 3x3 grid in which, depending on the mode you are playing (single, dual, tri, quad or penta) you will have to call back the following parameters,
+n times the value of n backwards.
+
+Single : the position of the X
+Dual : the position of the X and the sound
+Tri : the position of the X, the sound and it's coulour
+Quad : the position of the image (makes up two variables), the sound and coulour of the image
+Penta : all of the above, with a natural number between 1-9 (the range can be increased for a higher difficulty)
+
+Example : Single-1-Back, where the number of 'reps' is equal to 20 + n so here, 21
+
+_______.______..______.
+|      |       |      |
+|   X  |       |      |
+|______|______.|______|
+|      |       |      |
+|      |       |      |           y = 1             
+|______|______.|______|
+|      |       |      |
+|      |       |      |
+_______|______.|______|
+
+The position of the X appears on the first set
+
+_______.______..______.
+|      |       |      |
+|   X  |       |      |
+|______|______.|______|
+|      |       |      |
+|      |       |      |          y = 2
+|______|______.|______|
+|      |       |      |
+|      |       |      |
+_______|______.|______|
+
+On the second apparition, the position of the X is equal to the previous one ! It is therefore equal and in the game, you'd have to call it by pressing "a".
+On Single 2, this is the same process, but you would have to remember the first two apparitions, and recall them, etc, etc. 
+
+Here are the rules :
+  - if your accuracy is greater than 80%, your score (n) increases.
+  - if your accuracy is between or equal to 50%-80%, your score remains the same.
+  - if your accuracy is below 50%, your score will decrease after 3 games below 50%
+  - the maximum limit for the n is 20. Although this CAN be increased in manual mode, it is discouraged becaused it is untracked. And I doubt you are going to go above
+    15 in dual and up anyways lol (good luck for that)
+    
+
+The game feels incredibly weird and it is really uneasy for your brain at first, but you will rapidly adapt.
+  
+  
+
