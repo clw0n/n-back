@@ -7,7 +7,7 @@ with :
 ``````````
 git clone https://github.com/clw0n/n-back 
 
-python3 stats.py
+sudo python3 stats.py
 
 python3 n-back.py
 
