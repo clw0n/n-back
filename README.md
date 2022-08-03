@@ -2,9 +2,14 @@
 N-Back is a cognitive enhancment game that was proven to increase your fluid intelligence, which is the 'intelligence' responsible for problem solving skills, analogies, reasoning skills, which was previously thought to be fixed after a certain period.
 
 To install the game, simply clone the repository in the terminal
-with : __git clone https://github.com/clw0n/n-back__ and run __'python3 n-back.py'__
+with :
+
+``````````
+__git clone https://github.com/clw0n/n-back__ and run __'python3 n-back.py'__
 
 To create the log folder, thus enabling statistics, simply run the stats.py script in your terminal with __'python3 stats.py'__, this will create a log folder in the previously cloned directory. In order to display statistics, the script requires a few days worth of games. 
+
+``````````
 
 Note : project not finished, Implementing soon (by order):
   - __Fixing all bugs__ (game never stops), making a function for a better visual expression on the terminal, making so that you don't have to press a +       ENTER to match with the correct position
