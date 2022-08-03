@@ -7,9 +7,9 @@ with :
 ``````````
 git clone https://github.com/clw0n/n-back 
 
-python3 stats.py to create the log folder
+python3 stats.py
 
-run python3 n-back.py to play
+python3 n-back.py
 
 ``````````
 
