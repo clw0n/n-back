@@ -12,6 +12,7 @@ sudo python3 stats.py
 python3 n-back.py
 
 ``````````
+You need root access in order to create a folder and write files in (you can check the code in stats.py to be sure)
 
 Note : project not finished, Implementing soon (by order):
   - __Fixing all bugs__ (game never stops), making a function for a better visual expression on the terminal, making so that you don't have to press a +       ENTER to match with the correct position
