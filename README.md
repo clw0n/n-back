@@ -5,9 +5,11 @@ To install the game, simply clone the repository in the terminal
 with :
 
 ``````````
-__git clone https://github.com/clw0n/n-back__ and run __'python3 n-back.py'__
+git clone https://github.com/clw0n/n-back 
 
-To create the log folder, thus enabling statistics, simply run the stats.py script in your terminal with __'python3 stats.py'__, this will create a log folder in the previously cloned directory. In order to display statistics, the script requires a few days worth of games. 
+python3 stats.py to create the log folder
+
+run python3 n-back.py to play
 
 ``````````
 
