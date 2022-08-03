@@ -10,7 +10,6 @@ git clone https://github.com/clw0n/n-back
 sudo python3 stats.py
 
 python3 n-back.py
-
 ``````````
 You need root access in order to create a folder and write files in (you can check the code in stats.py to be sure)
 
