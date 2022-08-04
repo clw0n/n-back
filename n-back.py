@@ -43,20 +43,21 @@ def start_single():
         #printing the grid
         for elem in grid:
             print(elem)
-        if len(compare_list) == multiple:
-            clear_screen()
-        else:
+            if not len(compare_list) == multiple:
             answer = int(input("> "))
             if answer == 1:
-                if compare_list[-1] and compare_list[-2] == compare_list[-2 - n] and compare_list[-3 - n]:
+                if compare_list[-1] == compare_list[-1 - n + 1] and compare_list[-2] == compare_list[-2 - n + 1]:
                     stats.append(1)
                 else:
                     stats.append(0)
-            elif answer == 0:
-                if compare_list[-1] and compare_list[-2] != compare_list[-2 - n] and compare_list[-3 - n]:
+            else:
+                if compare_list[-1] != compare_list[-3]:
                     stats.append(1)
                 else:
                     stats.append(0)
+        else:
+            pass
+
         i += 1
     print(compare_list, stats)
     #returning statistics
