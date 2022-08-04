@@ -1,8 +1,10 @@
 import os, sys, random, sqlite3
 from time import sleep
+from django.db import OperationalError
 
 #make user select game mode
 def select():
+    start_date = os.system("date")
     print("""Please select a mode :
             1)Single-N-Back
             2)Dual-N-Back
@@ -22,8 +24,6 @@ def select():
         sys.exit("Game mode not available for now !")
     else:
         sys.exit("Please choose a valid number.")
-
-
 #single-n-back
 def start_single():
     #declaring the variables first
@@ -40,27 +40,26 @@ def start_single():
         grid[randint_1][randint_2] = "x"
         compare_list.append(randint_1)
         compare_list.append(randint_2)
-        #printing the grid
-        for elem in grid:
-            print(elem)
-            if not len(compare_list) == multiple:
+        if not len(compare_list) == multiple:
+            for elem in grid:
+                print(elem)
             answer = int(input("> "))
             if answer == 1:
-                if compare_list[-1] == compare_list[-1 - n + 1] and compare_list[-2] == compare_list[-2 - n + 1]:
+                if compare_list[-1] == compare_list[-1 - n - 1] and compare_list[-2] == compare_list[-2 - n - 1]:
                     stats.append(1)
                 else:
                     stats.append(0)
-            else:
-                if compare_list[-1] != compare_list[-3]:
-                    stats.append(1)
-                else:
-                    stats.append(0)
+            elif answer == 0:
+                if compare_list[-1] != compare_list[-1 - n - 1] and compare_list[-2] != compare_list[-2 - n - 1]:
+                    pass
         else:
-            pass
-
+            time.sleep(1)
+            for elem in grid:
+                print(elem)
+            time.sleep(3)
         i += 1
     print(compare_list, stats)
-    #returning statistics
+    #returning statistics to the user
     posi = []
     fails = []
     for elem in stats:
@@ -68,7 +67,7 @@ def start_single():
             posi.append(elem)
     accuracy = len(posi) / len(stats) * 100
     print("Game stats :\n")
-    print(f"Accuracy : {accuracy} %") 
+    print(f"Visual accuracy : {accuracy} %") 
     if 50.0 <= accuracy < 80.0:
         print("N-Back level is maintained. You need + 80% to increase your score.")
     elif accuracy >= 80.0:
@@ -78,7 +77,7 @@ def start_single():
     else:
         if len(fails) <3:
             fails.append(0)
-            print(f"N-Back level below 50% ! Only {3 - len(fails)} tries left and N-Back level will be decreased !")
+            print(f"N-Back level below 50% ! Only {3 - len(fails)} tries left and N-Back level will be decreased !") #make accountant
         else:
             if not n == 1:
                 n -= 1
@@ -86,27 +85,21 @@ def start_single():
                 print("N-Back level has been decreased.")
             else:
                 print("N-Back level is staying at 1.")
-
-def interface():
-    #create well looking interfaces for the n-back and store the different variables inside a dictionnary
-    pass
-
-def log_data():
-    #if the player doesn't play, no log will be created
-    #note time at which user launched n-back
-    date = os.popen("date") # + end game date (convert time = time activity)
-
-    #gather all data from current activity 
-    #put everything in a log file after session is interrupted
-    #transfer data into a local database
-    pass
+     
+    #transfering statistics into the log folder of the current session
+    try:
+        conn = sqlite3.connect(f"{date}.db")
+       
+    
+    except OperationalError:
+        #transfer the game data (start_time, accuracy, level increase
+        pass
+    
+    #veryfing the log folder for the session already exists
+    
 
 def clear_screen():
     os.system("clear -x")
-
-def settings():
-    pass
-    #change parameters : key bindings, erase all data, create a new user, change the interface
 
 if __name__ == "__main__":
     select()
