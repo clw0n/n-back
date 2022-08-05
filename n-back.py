@@ -1,10 +1,16 @@
 import os, sys, random, sqlite3, time
 from django.db import OperationalError
 
+start_date = os.system("date")
+
+
 #make user select game mode
 
+
 def select():
-    start_date = os.system("date")
+    #check if the current log file exists
+    #if yes wait for instructions
+    #if no create the file with the start_date variable as a name and store it inside the file
     print("""
     1) PLAY
     2) SETTINGS
@@ -30,7 +36,6 @@ def start_playing():
 
 def quit():
     print("Writing changes to log file...")
-    sys.e
     #write changes
     #try: #check changes wrote
     #   pass
@@ -39,8 +44,9 @@ def quit():
     sys.exit("Goodbye !")
 
 #single-n-back
-def start_single():
+def start_single(#n):  # n level wants to be checked from the previous log file, so its data needs to be gathered beforehand
     #declaring the variables first
+    levels_increased = 0
     multiple = 2
     n = 1
     i = 0
@@ -85,35 +91,43 @@ def start_single():
     if 50.0 <= accuracy < 80.0:
         print("N-Back level is maintained. You need + 80% to increase your score.")
         select()
+        #transfer_game_data(start_date, accuracy, levels_increased, SINGLENBACK)
     elif accuracy >= 80.0:
         print("N-Back level increased ! Good job !")
         n += 1
         multiple *= 2
+        levels_increased += 1
+        #transfer_game_data(start_date, accuracy, levels_increased, SINGLENBACK)
         select()
     else:
         if len(fails) <3:
             fails.append(0)
             print(f"N-Back level below 50% ! Only {3 - len(fails)} tries left and N-Back level will be decreased !")
+            #transfer_game_data(start_date, accuracy, levels_increased, SINGLENBACK)
             select()
         else:
             if not n == 1:
                 n -= 1
                 multiple /= 2
                 print("3 fails ! N-Back level has been decreased.")
+                levels_increased -= 1
+                #transfer_game_data(start_date, accuracy, levels_increased, SINGLENBACK)
                 select()
             else:
                 print("N-Back level already at the lowest, staying at 1.")
                 select()
-     
+
+                
+def transfer_game_data(start_date, accuracy, levels_increased, game_mode):
     #transfering statistics into the log folder of the current session
     #try:
-        #conn = sqlite3.connect(f"{start_date}.db")
-       
-    
+    #conn = sqlite3.connect(f"{start_date}.db")
+
+
     #except OperationalError:
-        #transfer the game data (start_time, accuracy, level increase
-        #pass
-    
+    #transfer the game data (start_time, accuracy, level increase
+    #pass
+
     #veryfing the log folder for the session already exists
 
 
@@ -129,25 +143,31 @@ def print_choices():
         5) PENTA-N-BACK
         6) GO BACK\n""")
 
-def stats():
+    
+def retrieve_data(): #retrieve log data from the existing latest file of the log folder
+    pass
+    
+def stats(): #create a graph from all the log data files
     pass
 
-def start_dual():
+def start_dual(): #copy start_single, sound in the terminal
+    # sound will be represented by dictionnary of variables
+    # on a different sound panel folder ----> accuracy needs to contain all informations depending on the game mode to facilitate data transfer
     pass
 
-def start_tri():
+def start_tri(): #copy start dual, but with colour, same process, colour displayed in terminal etc
     pass
 
-def start_quad():
+def start_quad(): #copy start tri but with different figures
     pass
 
-def start_penta():
+def start_penta():#copy start tri but with numbers (requires graphical user interface)
     pass
 
-def settings(grid):
+def settings(): #change settings (graphical user interface only)
     pass
 
-def manual_mode():
+def manual_mode(): #untracked manual mode, don't log the data in the folder
     pass
 
 def clear_screen():
