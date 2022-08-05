@@ -2,47 +2,42 @@ import os, sys, random, sqlite3, time
 from django.db import OperationalError
 
 #make user select game mode
+
 def select():
     start_date = os.system("date")
-    print("""1) PLAY
-             2) SETTINGS
-             3) MANUAL
-             4) STATS
-             5) QUIT\n""")
+    print("""
+    1) PLAY
+    2) SETTINGS
+    3) MANUAL
+    4) STATS
+    5) QUIT\n""")
+
 
     choice = int(input("> "))
-    if choice == 1:
-        print("""1) SINGLE-N-BACK
-                 2) DUAL-N-BACK
-                 3) TRI-N-BACK
-                 4) QUAD-N-BACK
-                 5) PENTA-N-BACK
-                 6) GO BACK\n""")
-        game_mode = int(input("> "))
-        if game_mode == 1:
-            start_single()
-        elif game_mode == 2:
-            start_dual()
-        elif game_mode == 3:
-            start_tri()
-        elif game_mode ==4:
-            start_quad()
-        elif game_mode == 5:
-            start_penta()
-        elif game_mode == 6:
-            select()
-    elif choice == 2:
-        settings()
-    elif game_mode == 3:
-        manual_mode()
-    elif game_mode == 4:
-        sys.exit("In order to view statistics, close the program and run 'python3 stats.py' in the cloned n-back repository.")
-    elif game_mode == 5:
-        print("Writing changes to log files...")
-        #write log changes, exit
-        sys.exit("Shutting down... Goodbye !")
-    else:
-        sys.exit("Please choose a valid number.")
+
+    first_actions = {1: start_playing, 2: settings, 3: manual_mode, 4: stats, 5: quit}
+    first_action = first_actions.get(choice, error)
+    first_action()
+
+def start_playing():
+    print_choices()
+
+    game_mode = int(input("> "))
+
+    actions = {1: start_single, 2: start_dual, 3: start_tri, 4: start_quad, 5: start_penta, 6:  select}
+    action = actions.get(game_mode, error)
+    action()
+
+def quit():
+    print("Writing changes to log file...")
+    sys.e
+    #write changes
+    #try: #check changes wrote
+    #   pass
+    #except: #file doesn't exist or was deleted
+    #    pass
+    sys.exit("Goodbye !")
+
 #single-n-back
 def start_single():
     #declaring the variables first
@@ -122,6 +117,21 @@ def start_single():
     #veryfing the log folder for the session already exists
 
 
+def error():
+    sys.exit("Please select a correct number.")
+
+def print_choices():
+            print("""
+        1) SINGLE-N-BACK
+        2) DUAL-N-BACK
+        3) TRI-N-BACK
+        4) QUAD-N-BACK
+        5) PENTA-N-BACK
+        6) GO BACK\n""")
+
+def stats():
+    pass
+
 def start_dual():
     pass
 
@@ -149,4 +159,3 @@ def grid():
 
 if __name__ == "__main__":
     select()
-mkultra79@mkult
