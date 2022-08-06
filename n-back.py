@@ -1,12 +1,19 @@
 import os, sys, random, sqlite3, time
 from django.db import OperationalError
 
-start_date = os.system("date")
+start_date = os.system("date| grep 2022 | cut -b 6-18")
+#check if log file exists
+if start_date in os.listdir("__log__"):
+    pass
+else:
+    try: #check if the table exists, if not create it
+        conn = sqlite3.connect(f"{start_date}.db")
+        cursor = conn.cursor()
+        cursor.execute("""CREATE TABLE nback(
+        id INTEGER )""")
 
 
 #make user select game mode
-
-
 def select():
     #check if the current log file exists
     #if yes wait for instructions
