@@ -2,7 +2,7 @@ import os, sys, random, sqlite3, time
 from django.db import OperationalError
 
 
-start_date = os.system("date| grep 2022 | cut -b 6-18")
+start_date = os.system("date| grep 2022 | cut -b 6-18").read()
 
 if not "n-back" in os.listdir():
     sys.exit("Are you in the correct directory ?")
