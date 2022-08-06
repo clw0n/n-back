@@ -1,20 +1,33 @@
 import os, sys, random, sqlite3, time
 from django.db import OperationalError
 
-start_date = os.system("date| grep 2022 | cut -b 6-18")
-#check if log file exists
-if start_date in os.listdir("__log__"):
-    pass
-else:
-    try: #check if the table exists, if not create it
-        conn = sqlite3.connect(f"{start_date}.db")
-        cursor = conn.cursor()
-        cursor.execute("""CREATE TABLE nback(
-        id INTEGER )""")
 
+start_date = os.system("date| grep 2022 | cut -b 6-18")
+
+if not "n-back" in os.listdir():
+    sys.exit("Are you in the correct directory ?")
+
+#check if the game log already exists
+if not start_date in os.listdir("__log__"):
+    conn = sqlite3.connect(f"/__log__/{start_date}.db")
+    cursor = conn.cursor()
+    cursor.execute("""CREATE TABLE nback(
+    dateID BLOB PRIMARY KEY,
+    accuracy INTEGER,
+    levels_increased INTEGER,
+    game_mode INTEGER
+    n INTEGER)""")
+    cursor.execute("""INSERT INTO nback(dateID) VALUES(?)""",(start_date))
+    conn.commit()
+    conn.close()
+    print("Log file created in the __log__ folder.")
+else:
+    print(f"Log file from this day detected. Writing changes in", dirfile, start_date, ".db")
+    select()
 
 #make user select game mode
 def select():
+
     #check if the current log file exists
     #if yes wait for instructions
     #if no create the file with the start_date variable as a name and store it inside the file
@@ -42,13 +55,7 @@ def start_playing():
     action()
 
 def quit():
-    print("Writing changes to log file...")
-    #write changes
-    #try: #check changes wrote
-    #   pass
-    #except: #file doesn't exist or was deleted
-    #    pass
-    sys.exit("Goodbye !")
+    sys.exit("Shutting down... Goodbye !")
 
 #single-n-back
 def start_single(#n):  # n level wants to be checked from the previous log file, so its data needs to be gathered beforehand
@@ -151,8 +158,10 @@ def print_choices():
         6) GO BACK\n""")
 
     
-def retrieve_data(): #retrieve log data from the existing latest file of the log folder
-    pass
+def retrieve_data(game_mode): #retrieve log data from the existing latest file of the log folder
+    conn = sqlite3.connect(f"/__log__/{start_date}.db") #
+    cursor = conn.cursor()
+    cursor.execute("""""") #retrieve the n level and 
     
 def stats(): #create a graph from all the log data files
     pass
@@ -179,10 +188,6 @@ def manual_mode(): #untracked manual mode, don't log the data in the folder
 
 def clear_screen():
     os.system("clear -x")
-
-def grid():
-    grid = [[0 for i in range(3)] for i in range(3)]
-    return grid
-
+    
 if __name__ == "__main__":
     select()
