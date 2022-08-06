@@ -175,7 +175,7 @@ def clear_screen():
 
 def grid():
     grid = [[0 for i in range(3)] for i in range(3)]
-    return grid()
+    return grid
 
 if __name__ == "__main__":
     select()
