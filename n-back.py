@@ -27,10 +27,6 @@ else:
 
 #make user select game mode
 def select():
-
-    #check if the current log file exists
-    #if yes wait for instructions
-    #if no create the file with the start_date variable as a name and store it inside the file
     print("""
     1) PLAY
     2) SETTINGS
@@ -57,8 +53,8 @@ def start_playing():
 def quit():
     sys.exit("Shutting down... Goodbye !")
 
-#single-n-back
-def start_single(#n):  # n level wants to be checked from the previous log file, so its data needs to be gathered beforehand
+#single-n-back mode
+def start_single(#n uncommented for now):
     #declaring the variables first
     levels_increased = 0
     multiple = 2
@@ -85,7 +81,7 @@ def start_single(#n):  # n level wants to be checked from the previous log file,
                     stats.append(0)
             elif answer == 0:
                 if compare_list[-1] != compare_list[-1 - n - 1] and compare_list[-2] != compare_list[-2 - n - 1]:
-                    pass
+                    stats.append(0)
         else:
             time.sleep(1)
             for elem in grid:
@@ -183,8 +179,86 @@ def start_penta():#copy start tri but with numbers (requires graphical user inte
 def settings(): #change settings (graphical user interface only)
     pass
 
-def manual_mode(): #untracked manual mode, don't log the data in the folder
-    pass
+def manual_mode():
+    def single_manual(n):
+        levels_increased = 0
+        multiple = 2
+        n = 1
+        i = 0
+        stats = []
+        compare_list = []
+        while i <= 20 + n:
+            grid = [[0 for i in range(3)] for i in range(3)]
+            clear_screen()
+            randint_1 = random.randint(0,2)
+            randint_2 = random.randint(0,2)
+            grid[randint_1][randint_2] = "x"
+            compare_list.append(randint_1)
+            compare_list.append(randint_2)
+            if not len(compare_list) == multiple:
+                for elem in grid:
+                    print(elem)
+                answer = int(input("> "))
+                if answer == 1:
+                    if compare_list[-1] == compare_list[-1 - n - 1] and compare_list[-2] == compare_list[-2 - n - 1]:
+                        stats.append(1)
+                    else:
+                        stats.append(0)
+                elif answer == 0:
+                    if compare_list[-1] != compare_list[-1 - n - 1] and compare_list[-2] != compare_list[-2 - n - 1]:
+                        stats.append(0)
+            else:
+                time.sleep(1)
+                for elem in grid:
+                    print(elem)
+                time.sleep(3)
+            i += 1
+        print(compare_list, stats)
+        #returning statistics to the user
+        posi = []
+        fails = []
+        for elem in stats:
+            if elem == 1:
+                posi.append(elem)
+        accuracy = len(posi) / len(stats) * 100
+        print("Game stats :\n")
+        print(f"Visual accuracy : {accuracy} %") 
+        if 50.0 <= accuracy < 80.0:
+            print("N-Back level is maintained. You need + 80% to increase your score.")
+            select()
+        elif accuracy >= 80.0:
+            print("N-Back level increased ! Good job !")
+            n += 1
+            multiple *= 2
+            select()
+        else:
+            if len(fails) <3:
+                fails.append(0)
+                print(f"N-Back level below 50% ! Only {3 - len(fails)} tries left and N-Back level will be decreased !")
+                select()
+            else:
+                if not n == 1:
+                    n -= 1
+                    multiple /= 2
+                    print("3 fails ! N-Back level has been decreased.")
+                    select()
+                else:
+                    print("N-Back level already at the lowest, staying at 1.")
+                    select()
+
+    def dual_manual(n):
+        pass
+    def tri_manual(n):
+        pass
+    def quad_manual(n):
+        pass
+    print("Manual mode is untracked, your progress will not be saved.")
+    print_choices()
+    answer = int(input("> "))
+    
+    
+
+    
 
 def clear_screen():
     os.system("clear -x")
